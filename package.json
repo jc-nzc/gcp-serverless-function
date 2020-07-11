@@ -1,0 +1,8 @@
+{
+  "name": "anthemcNLP",
+  "version": "0.0.1",
+  "dependencies": {
+    "@google-cloud/language": "^2.0.0",
+    "keen-tracking": "^4.0.15"
+  }
+}
