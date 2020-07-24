@@ -5,7 +5,7 @@ class Borg:
     def __init__(self):
         self.__dict__ = self._shared_data # Make it an attribute dictionary
 
-class Singleton(Borg):
+class Singleton(Borg): #Inherits from the Borg class
     """This class now shares all its attributes among its various instances"""
     #This essentially makes the singleton objects an object-oriented global variable
 
