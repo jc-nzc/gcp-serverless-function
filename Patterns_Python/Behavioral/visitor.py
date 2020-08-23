@@ -25,3 +25,19 @@ class HvacSpecialist(Visitor):
     """Concrete visitor: HVAC specialist"""
     def visit(self, house):
         house.work_on_hvac(self)
+
+
+class Electrician(Visitor):
+    """Concrete visitor: electrician"""
+    def visit(self, house):
+        house.work_on_electricity(self)
+
+
+hv = HvacSpecialist()
+
+e = Electrician()
+
+
+home.accept(hv)
+
+home.accept(e)
