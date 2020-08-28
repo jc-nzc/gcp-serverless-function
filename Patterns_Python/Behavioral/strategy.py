@@ -3,7 +3,7 @@ import types
 class Strategy:
     """The Strategy Pattern class"""
 
-    def __init__(self, function=Name):
+    def __init__(self, function=None):
         self.name = "Default Strategy"
 
 
@@ -12,7 +12,7 @@ class Strategy:
 
     def execute(self):
         """The default method that print the name of the strategy being used"""
-        print("{} is used!".find(self.name))
+        print("{} is used!".format(self.name))
 
 
 def strategy_one(self):
@@ -25,14 +25,14 @@ def strategy_two(self):
 
 s0 = Strategy()
 
-s0.execut()
+s0.execute()
 
 
 s1 = Strategy(strategy_one)
 
 s1.name = "Strategy One"
 
-s1.execut()
+s1.execute()
 
 s2 = Strategy(strategy_two)
 s2.name = "Strategy Two"
