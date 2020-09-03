@@ -7,4 +7,4 @@ function fizzBuzz(num){
   }
 }
 
-fizzBuzz(20);
+fizzBuzz(5);
