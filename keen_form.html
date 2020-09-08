@@ -10,51 +10,64 @@
   <body>
 
     <style>
-    html, body{
+      html, body {
+      font-family: Impact, Charcoal, sans-serif;
+      text-align: center;
+      }
+      .keen-dataviz-metric-value {
+        background: black !important;
+      }
+      .keen-dataviz-metric {
+        background: black !important;
+      }
+      #demo_container {
+        min-height: 100px;
+      }
+      #demo_container_2 {
+        min-height: 300px;
+      }
+      #country {
+        text-align-last: center;
+      }
+      input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        text-align: center !important;
+      }
+      input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center !important;
+      }
+      input[type=submit]:hover {
+        background-color: #45a049;
+        text-align: center !important;
+      }
+      /* select {
+        display: inline-block;
+        text-align: center !important;
+        align-items: center !important;
+      } */
+      div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        text-align: center !important;
+      }
+      h1 {
         font-family: Impact, Charcoal, sans-serif;
       }
-    .keen-dataviz-metric-value {
-      background: black !important;
-    }
-    .keen-dataviz-metric{
-      background: black !important;
-    }
-    #demo_container{
-      min-height: 200px;
-    }
-    input[type=text], select {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
 
-    input[type=submit] {
-      width: 100%;
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    input[type=submit]:hover {
-      background-color: #45a049;
-    }
-
-    div {
-      border-radius: 5px;
-      background-color: #f2f2f2;
-    }
-
-    h1 {
-      font-family: Impact, Charcoal, sans-serif;
-    }
     </style>
     <body>
 
@@ -80,6 +93,7 @@
     </div>
 
     <div id="demo_container"></div>
+    <div id="demo_container_2"></div>
 
     <script>
       (function(name,path,ctx){ctx[name]=ctx[name]||{ready:function(fn){var h=document.getElementsByTagName('head')[0],s=document.createElement('script'),w=window,loaded;s.onload=s.onerror=s.onreadystatechange=function(){if((s.readyState&&!(/^c|loade/.test(s.readyState)))||loaded){return}s.onload=s.onreadystatechange=null;loaded=1;ctx[name].ready(fn)};s.async=1;s.src=path;h.parentNode.insertBefore(s,h)}}})
@@ -121,6 +135,36 @@
           chart
             .message(error.message);
         });
+
+        const chart2 = new KeenDataviz({
+          container: '#demo_container_2', // querySelector
+          type: 'area',
+          title: false
+        });
+
+        // Use keen-analysis.js to run a query
+        const client2 = new KeenAnalysis({
+          projectId: '5f524a863d270e0dcc104fd7',
+          readKey: '7d43ee16837e7c9106731867219ce1a5cb4d77b29f87b4a0ed9355c958c971da044d6c238afdc2df1109751e6227ac2290b87c47e0b0d6b79e62c21ea32f6628739651d65da63bac46ee498db53221d0079b99c026a9d85f4418ac442ac52e42'
+        });
+
+        client2
+          .query({
+            analysisType: 'count',
+            eventCollection: 'pageviews',
+            timeframe: "this_10_minutes",
+            interval: 'minutely',
+            groupBy: ["tech.browser.family"],
+            timezone: -21600,
+          })
+          .then(function(results){
+            chart2
+              .render(results);
+          })
+          .catch(function(error){
+            chart2
+              .message(error.message);
+          });
     </script>
 
   </body>
