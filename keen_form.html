@@ -46,6 +46,11 @@
         min-height: 300px;
         padding-top: 1em;
       }
+      #demo_container_3 {
+        min-height: 300px;
+        padding-top: 1em;
+        padding-bottom: 1em;
+      }
       #country {
         text-align-last: center;
       }
@@ -104,6 +109,7 @@
     <body>
 
     <h1>ActiveProspect | Keen.io</h1>
+    <!-- <h2>Form Example</h2> -->
 
     <div>
       <form action="https://activeprospect.com/">
@@ -123,10 +129,15 @@
         <input type="submit" value="Submit">
       </form>
     </div>
+    <!-- <h2>Analytics Example</h2> -->
     <br>
     <div id="demo_container"></div>
     <br>
     <div id="demo_container_2"></div>
+    <br>
+    <!-- Disabled -->
+    <div id="demo_container_3"></div>
+
 
     <script>
       (function(name,path,ctx){ctx[name]=ctx[name]||{ready:function(fn){var h=document.getElementsByTagName('head')[0],s=document.createElement('script'),w=window,loaded;s.onload=s.onerror=s.onreadystatechange=function(){if((s.readyState&&!(/^c|loade/.test(s.readyState)))||loaded){return}s.onload=s.onreadystatechange=null;loaded=1;ctx[name].ready(fn)};s.async=1;s.src=path;h.parentNode.insertBefore(s,h)}}})
@@ -141,19 +152,20 @@
         // Record events automatically
         client.initAutoTracking();
       });
-
-      const chart = new KeenDataviz({
-        container: '#demo_container', // querySelector
-        type: 'metric',
-        title: 'Page Views'
-      });
-
       // Use keen-analysis.js to run a query
       const client = new KeenAnalysis({
         projectId: '5f524a863d270e0dcc104fd7',
         readKey: '7d43ee16837e7c9106731867219ce1a5cb4d77b29f87b4a0ed9355c958c971da044d6c238afdc2df1109751e6227ac2290b87c47e0b0d6b79e62c21ea32f6628739651d65da63bac46ee498db53221d0079b99c026a9d85f4418ac442ac52e42'
       });
 
+      // Chart 1 Count of Pageviews
+      const chart = new KeenDataviz({
+        container: '#demo_container', // querySelector
+        type: 'metric',
+        title: 'Page Views'
+      });
+
+      // Query #1
       client
         .query({
           analysisType: 'count',
@@ -170,36 +182,56 @@
             .message(error.message);
         });
 
-        const chart2 = new KeenDataviz({
-          container: '#demo_container_2', // querySelector
-          type: 'area-spline',
-          title: 'Form Submissions',
+      // Chart 2 Form Submits
+      const chart2 = new KeenDataviz({
+        container: '#demo_container_2', // querySelector
+        type: 'area-spline',
+        title: 'Form Submissions',
+      });
+
+      // Query #2
+      client
+        .query({
+          analysisType: 'count',
+          eventCollection: 'form_submissions',
+          timeframe: "this_14_days",
+          interval: 'daily',
+          groupBy: ["tech.browser.family"],
+          timezone: "US/Central",
+        })
+        .then(function(results){
+          chart2
+            .render(results);
+        })
+        .catch(function(error){
+          chart2
+            .message(error.message);
         });
 
-
-        // Use keen-analysis.js to run a query
-        const client2 = new KeenAnalysis({
-          projectId: '5f524a863d270e0dcc104fd7',
-          readKey: '7d43ee16837e7c9106731867219ce1a5cb4d77b29f87b4a0ed9355c958c971da044d6c238afdc2df1109751e6227ac2290b87c47e0b0d6b79e62c21ea32f6628739651d65da63bac46ee498db53221d0079b99c026a9d85f4418ac442ac52e42'
+      // Chart 3 FF by Country
+      const chart3 = new KeenDataviz({
+        container: '#demo_container_3', // querySelector
+        type: 'donut',
+        title: false,
+        title: 'Form Fields By Country',
+      });
+      // Query #3
+      client
+        .query({
+          analysisType: 'count',
+          eventCollection: 'form_submissions',
+          timeframe: "this_14_days",
+          groupBy: ["form.fields.country"],
+        })
+        .then(function(results){
+          chart3
+            .render(results);
+        })
+        .catch(function(error){
+          chart3
+            .message(error.message);
         });
 
-        client2
-          .query({
-            analysisType: 'count',
-            eventCollection: 'form_submissions',
-            timeframe: "this_14_days",
-            interval: 'daily',
-            groupBy: ["tech.browser.family"],
-            timezone: "US/Central",
-          })
-          .then(function(results){
-            chart2
-              .render(results);
-          })
-          .catch(function(error){
-            chart2
-              .message(error.message);
-          });
     </script>
 
   </body>
