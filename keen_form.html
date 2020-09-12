@@ -159,6 +159,7 @@
           analysisType: 'count',
           eventCollection: 'pageviews',
           timeframe: "this_14_days",
+          timezone: "US/Central"
         })
         .then(function(results){
           chart
@@ -189,7 +190,7 @@
             timeframe: "this_14_days",
             interval: 'daily',
             groupBy: ["tech.browser.family"],
-            timezone: -21600,
+            timezone: "US/Central",
           })
           .then(function(results){
             chart2
