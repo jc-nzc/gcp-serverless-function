@@ -11,23 +11,40 @@
 
     <style>
       html, body {
-      font-family: Impact, Charcoal, sans-serif;
+      font-family: Impact, sans-serif !important;
       text-align: center;
       }
+      body{
+        margin-left: 275px;
+        margin-right: 275px;
+      }
       .keen-dataviz-metric-value {
-        background: black !important;
+        font-family: Impact, Charcoal, sans-serif !important;
+        background: #f2f2f2 !important;
+        color: black;
       }
       .keen-dataviz-metric {
-        background: black !important;
+        font-family: Impact, Charcoal, sans-serif !important;
+        background: #f2f2f2 !important;
+        color: black;
       }
       .keen-dataviz-metric-title{
-        background: black !important;
+        font-family: Impact, Charcoal, sans-serif !important;
+        background: #f2f2f2 !important;
+      }
+      .keen-dataviz-title {
+        font-family: Impact, Charcoal, sans-serif !important;
+        color: black;
+        font-size: 2em;
+        font-weight: 200;
+        width: 100%;
       }
       #demo_container {
         min-height: 100px;
       }
       #demo_container_2 {
         min-height: 300px;
+        padding-top: 1em;
       }
       #country {
         text-align-last: center;
@@ -43,6 +60,7 @@
         text-align: center !important;
       }
       input[type=submit] {
+        font-family: Impact, sans-serif !important;
         width: 100%;
         background-color: #4CAF50;
         color: white;
@@ -66,15 +84,26 @@
         border-radius: 5px;
         background-color: #f2f2f2;
         text-align: center !important;
+        /* padding: 20px; */
+        /* margin-left: 50px;
+        width: 60%; */
       }
       h1 {
         font-family: Impact, Charcoal, sans-serif;
+        font-size: 42px;
+      }
+      form {
+          display: block;
+          padding: 20px;
+          /* padding-top: 1em;
+          padding-bottom: 1em; */
+          /* width: 40% !important; */
       }
 
     </style>
     <body>
 
-    <h1>AP Forms | Keen Analaytics</h1>
+    <h1>ActiveProspect | Keen.io</h1>
 
     <div>
       <form action="https://activeprospect.com/">
@@ -94,9 +123,9 @@
         <input type="submit" value="Submit">
       </form>
     </div>
-
+    <br>
     <div id="demo_container"></div>
-    <br><br>
+    <br>
     <div id="demo_container_2"></div>
 
     <script>
@@ -116,7 +145,7 @@
       const chart = new KeenDataviz({
         container: '#demo_container', // querySelector
         type: 'metric',
-        title: 'Pageviews'
+        title: 'Page Views'
       });
 
       // Use keen-analysis.js to run a query
@@ -145,7 +174,7 @@
           type: 'area-spline',
           title: 'Form Submissions',
         });
-        
+
 
         // Use keen-analysis.js to run a query
         const client2 = new KeenAnalysis({
