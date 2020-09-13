@@ -37,7 +37,7 @@ def basic_add():
 	# )
 
 if __name__ == '__main__':
-	for i in range(1,16):
+	for i in range(1,20):
 		print(i)
 		basic_add()
 		time.sleep(60)
