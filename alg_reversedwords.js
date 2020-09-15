@@ -1,16 +1,16 @@
 function reverseWords(string) {
   var wordsArr = string.split(' ');
-  var reverseWordsArr = [];
+  var reversedWordsArr = [];
 
   wordsArr.forEach(word => {
-    var reverseWord = '';
-    for (var i = word.length - 1; 1 >= 0; i--){
+    var reversedWord = '';
+    for (var i = word.length - 1; i >= 0; i--) {
       reversedWord += word[i];
     };
-    reversedWordsArr.push(reverseWord);
+    reversedWordsArr.push(reversedWord);
   });
 
   return reversedWordsArr.join(' ');
 }
 
-reverseWords('Coding Javascript On The Regular')
+console.log(reverseWords('Coding JavaScript On The Regular'));
