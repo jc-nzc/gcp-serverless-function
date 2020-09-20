@@ -58,4 +58,4 @@ function getMode(array) {
 }
 
 
-console.log(meanMedianMode([9,10,23,10,23,9]));
+console.log(meanMedianMode([9,10,23,10,23,9,5,6,7,7,7,7,7,99]));
