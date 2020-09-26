@@ -1,22 +1,15 @@
-function sieveOfEratosthenes(n) {
-  var primes = [];
-  for (var i = 0; i <= n; i++) {
-  primes[i] = true;
-  }
-  
-  primes[0] = false;
-  primes[1] = false;
-
-  for (var i = 2; i <= Math.sqrt(n); i++{
-    for (j = 2; i * j <= n; j++{
-    primes[i * j] = false;
+function primNum(num){
+  var primObj = [];
+  for (var i = 0; i <=num; i++) {
+    var outComes = i
+    if( outComes === 2){
+      primObj.push(outComes)
+    }
+    if ( outComes % 2 === 1){
+      primObj.push(outComes)
     }
   }
-  var result = [];
-  for (var i = 0; i < primes.length; i ++){
-    if(primes[i]; result.push(i);
-  }
-  return result;
+  return primObj;
 }
 
-console.log(sieveOfEratosthenes(49));
+console.log(primNum(10));
