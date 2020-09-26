@@ -12,5 +12,11 @@ function sieveOfEratosthenes(n) {
     primes[i * j] = false;
     }
   }
-
+  var result = [];
+  for (var i = 0; i < primes.length; i ++){
+    if(primes[i]; result.push(i);
+  }
+  return result;
 }
+
+console.log(sieveOfEratosthenes(49));
