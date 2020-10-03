@@ -21,4 +21,4 @@ function merge (array1, array2) {
     return result;
 }
 
-mergeSort([6000, 34, 203, 3, 746, 200, 984, 198, 764, 1, 9, 1])
+console.log(mergeSort([6000, 34, 203, 3, 746, 200, 984, 198, 764, 1, 9, 1]))
