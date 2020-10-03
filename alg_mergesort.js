@@ -9,7 +9,7 @@ function mergeSort (arr) {
 
 function merge (array1, array2) {
     var result = [];
-    while (array1.length && array2.length {
+    while (array1.length && array2.length) {
     var minElem:
     if (array1[0] < array2[0] minElem = array1.shift();
     else minElem = array2.shift();
