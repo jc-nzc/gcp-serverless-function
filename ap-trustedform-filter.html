@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="UTF-8">
+    <title>CashPrizes | Trash Leads Surplus and More</title>
+    <style>
+    	fieldset {margin: 20px; padding: 0 10px 10px;  border: 1px solid #666; display: inline-block; border-radius: 8px;  box-shadow: 0 0 10px #666;  padding-top: 10px;}
+    	body {font-size: 24px; font-family:Courier New; text-align: center; background: white;}
+  	</style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  </head>
+  <body>
+    <h1>Fill Out This Form For A Chance <br> To Win Cash Prizes 😈</h1>
+    <form id="thisForm" class="input" type="text" placeholder="Enter your feedback...">
+      <fieldset>
+        First name: <input type="text" name="first_name" id="first_name" class="txt" onClick="myFunction()"/> <br />
+        Last name: &nbsp;<input type="text" name="last_name" id="last_name" class="txt" /> <br />
+        Phone: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="phone_1" name="phone_1" class="txt" /> <br />
+        Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"  id="email" name="email" class="txt" /> <br />
+        Zip Code: &nbsp;&nbsp;<input type="text" name="postal_code" id="postal_code" class="txt" /> <br /><br />
+        <input type="checkbox" name="disclaimer" /> By clicking this button, </br>I hereby consent to delusions of grandeur...
+        <br /> <br />
+        <!-- <input type="submit" value="Start" onclick="submit()"> -->
+        <button type="submit" id="submitButton">Submit</button>
+      </fieldset>
+    </form>
+
+    <div id="TF_URL"></div>
+
+    <script type="text/javascript">
+      function myFunction() {
+        document.getElementById("TF_URL").innerHTML = "<b>TF URL:</b> " + document.getElementById("xxTrustedFormToken_0").value;
+      }
+    </script>
+    <!-- Generate a TrustedForm Certificate -->
+    <script type="text/javascript">
+      (function() {
+          var field = 'xxTrustedFormCertUrl';
+          var provideReferrer = false;
+          var invertFieldSensitivity = false;
+          var sandbox = false;
+          var tf = document.createElement('script');
+          tf.type = 'text/javascript'; tf.async = true;
+          tf.src = 'http' + ('https:' == document.location.protocol ? 's' : '') +
+            '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random() + '&invert_field_sensitivity=' + invertFieldSensitivity + '&sandbox=' + sandbox;
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
+      )();
+    </script>
+
+    <script>
+      $('#submitButton').click(function(){ SubmitFeedback(); return false; });
+      var SubmitFeedback = function() {
+        $.ajax({
+            type: "POST",
+            url: "https://app.leadconduit.com/flows/5f441019fb577095e08dad84/sources/603effc14f3b8a066bf0af46/submit",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(
+              {
+                first_name: $(first_name).val(),
+                last_name: $(last_name).val(),
+                email: $(email).val(),
+                phone_1: $(phone_1).val(),
+                postal_code: $(postal_code).val(),
+                campaign_id: "666",
+                trustedform_cert_url: document.getElementById("xxTrustedFormToken_0").value
+              }
+            ),
+            // log a success if it sends as expected and display message in markup
+            success: function(data){
+              console.log('success', data)
+            },
+            // log error message in our console if an error occurs and display message in markup
+            error: function(errMsg) {
+              console.log("got an error", errMsg)
+            }
+        });
+      }
+    </script>
+
+    <noscript>
+      <img src="http://api.trustedform.com/ns.gif" />
+    </noscript>
+
+  </body>
+</html>
+
